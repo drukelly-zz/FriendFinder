@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>FriendFinder: Home</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
 </head>
-<body>
-  
+
+<body class="sans-serif">
+  <section class="flex-ns vh-100 items-center">
+    <div class="mw6 ph5">
+      <img src="https://source.unsplash.com/random/584x1024/?friends,people" class="h-100 w-100">
+    </div>
+    <div class="tc tl-ns ph3">
+      <h1 class="f3 f1-l fw2 mb3 mt4 mt0-ns">Friend Finder</h1>
+      <h2 class="f5 f3-l fw1 mb4 mb5-l lh-title">Answer a few basic questions. Then find the friend with the greatest
+        compatibility!</h2>
+      <a href="/survey" class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">
+        Go to Survey
+      </a>
+      <div class="mv4">
+        <a href="/api/friends" class="blue link">API Friends List</a> | <a
+          href="https://github.com/drukelly/FriendFinder" class="blue link">GitHub Repo</a>
+      </div>
+    </div>
+  </section>
 </body>
+
 </html>
