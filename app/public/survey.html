@@ -12,7 +12,7 @@
 <body class="sans-serif">
   <div class="ma4">
     <h1 class="f3 f1-l fw2 mb3 mt4 mt0-ns lh-title">Friend Finder: Survey</h1>
-    <form class="mb6">
+    <form class="mb4">
       <h2 class="lh-title">About You</h2>
       <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
         <legend class="b bw0 f6 pa0 ma0">Name</legend>
@@ -23,7 +23,10 @@
         <input type="text" name="photoURL" required class="input-reset ph2 pv1 w-100">
       </fieldset>
       <h2 class="lh-title">Questions</h2>
-      <p class="f7 lh-copy tc">1 = Strongly Disagree | 5 = Strongly Agree</p>
+      <div class="f7 pb4 flex items-center justify-between">
+        <span>1 = Strongly Disagree</span>
+        <span>5 = Strongly Agree</span>
+      </div>
       <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
         <legend class="b bw0 f6 pa0 ma0">I make friends easily.</legend>
         <div class="flex items-center">
@@ -94,7 +97,7 @@
           <output id="q10Value" class="pl3">3</output>
         </div>
       </fieldset>
-      <button class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue input-reset bw0 pointer w-100">Submit</button>
+      <button class="f6 link dim br-pill ph3 pv2 mv4 dib white bg-dark-blue input-reset bw0 pointer w-100">Submit</button>
     </form>
     <div class="tc">
       <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder"
