@@ -9,10 +9,97 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
 </head>
 
-<body>
-  <div class="mv4">
-    <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder"
+<body class="sans-serif">
+  <div class="ma4">
+    <h1 class="f3 f1-l fw2 mb3 mt4 mt0-ns lh-title">Friend Finder: Survey</h1>
+    <form class="mb6">
+      <h2 class="lh-title">About You</h2>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">Name</legend>
+        <input type="text" name="firstName" required class="input-reset ph2 pv1 w-100">
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">Photo URL</legend>
+        <input type="text" name="photoURL" required class="input-reset ph2 pv1 w-100">
+      </fieldset>
+      <h2 class="lh-title">Questions</h2>
+      <p class="f7 lh-copy tc">1 = Strongly Disagree | 5 = Strongly Agree</p>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I make friends easily.</legend>
+        <div class="flex items-center">
+          <input name="q1" type="range" value="3" min="1" max="5" step="1" onmousemove="q1Value.value=value" class="w-100">
+          <output id="q1Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I prefer variety to routine.</legend>
+        <div class="flex items-center">
+          <input name="q2" type="range" value="3" min="1" max="5" step="1" onmousemove="q2Value.value=value" class="w-100">
+          <output id="q2Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I like to solve complex problems.</legend>
+        <div class="flex items-center">
+          <input name="q3" type="range" value="3" min="1" max="5" step="1" onmousemove="q3Value.value=value" class="w-100">
+          <output id="q3Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I make people feel welcome.</legend>
+        <div class="flex items-center">
+          <input name="q4" type="range" value="3" min="1" max="5" step="1" onmousemove="q4Value.value=value" class="w-100">
+          <output id="q4Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I try to follow the rules.</legend>
+        <div class="flex items-center">
+          <input name="q5" type="range" value="3" min="1" max="5" step="1" onmousemove="q5Value.value=value" class="w-100">
+          <output id="q5Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I trust what people say.</legend>
+        <div class="flex items-center">
+          <input name="q6" type="range" value="3" min="1" max="5" step="1" onmousemove="q6Value.value=value" class="w-100">
+          <output id="q6Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I like music.</legend>
+        <div class="flex items-center">
+          <input name="q7" type="range" value="3" min="1" max="5" step="1" onmousemove="q7Value.value=value" class="w-100">
+          <output id="q7Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I can't stand confrontations.</legend>
+        <div class="flex items-center">
+          <input name="q8" type="range" value="3" min="1" max="5" step="1" onmousemove="q8Value.value=value" class="w-100">
+          <output id="q8Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I dislike talking about myself.</legend>
+        <div class="flex items-center">
+          <input name="q9" type="range" value="3" min="1" max="5" step="1" onmousemove="q9Value.value=value" class="w-100">
+          <output id="q9Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
+        <legend class="b bw0 f6 pa0 ma0">I enjoy being part of a group.</legend>
+        <div class="flex items-center">
+          <input name="q10" type="range" value="3" min="1" max="5" step="1" onmousemove="q10Value.value=value" class="w-100">
+          <output id="q10Value" class="pl3">3</output>
+        </div>
+      </fieldset>
+      <button class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue input-reset bw0 pointer w-100">Submit</button>
+    </form>
+    <div class="tc">
+      <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder"
       class="blue link">GitHub Repo</a>
+    </div>
   </div>
 </body>
 
