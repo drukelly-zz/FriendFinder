@@ -1,4 +1,3 @@
-// TODO
 // apiRoutes.js
 
 const friends = require('../data/friends')
