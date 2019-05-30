@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>FriendFinder: Survey</title>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
-  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
 </head>
 
 <body class="sans-serif">
@@ -17,11 +16,11 @@
       <h2 class="lh-title">About You</h2>
       <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
         <legend class="b bw0 f6 pa0 ma0">Name</legend>
-        <input type="text" name="firstName" required class="input-reset ph2 pv1 w-100">
+        <input type="text" id="firstName" name="firstName" required class="input-reset ph2 pv1 w-100">
       </fieldset>
       <fieldset class="bw0 ph0 pv2 mb2 mh0 w-100">
         <legend class="b bw0 f6 pa0 ma0">Photo URL</legend>
-        <input type="text" name="photoURL" required class="input-reset ph2 pv1 w-100">
+        <input type="text" id="photoURL" name="photoURL" required class="input-reset ph2 pv1 w-100">
       </fieldset>
       <h2 class="lh-title">Questions</h2>
       <div class="f7 pb4 flex items-center justify-between">
@@ -104,7 +103,51 @@
       <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder" class="blue link">GitHub Repo</a>
     </div>
   </div>
-  <script src="js/app.js"></script>
+  <script>
+    const form = document.querySelector('form')
+    const modal = document.querySelector('.modal')
+    const submit = document.querySelector('button')
+    let scores = [],
+        sumTotal = 0
+
+    const handleErrors = (response) => {
+      if (!response.ok) throw Error(response.statusText)
+      return response
+    }
+
+    const evalFriend = (event) => {
+      event.preventDefault()
+      let bigDiff = { difference: 9000 },
+          friendDiffs = [],
+          totalDiff = []
+      if (submit.getAttribute('data-toggle') === null || submit.getAttribute('data-toggle') === '') {
+        submit.setAttribute('data-toggle', 'modal')
+      }
+      let firstName = document.querySelector('#firstName').value.trim(),
+          photoURL = document.querySelector('#photoURL').value.trim(),
+          ranges = document.querySelectorAll('input[type="range"]')
+      for (let range of ranges) {
+        scores.push(parseInt(range.value))
+      }
+      if (firstName === '' || photoURL === '' || scores.includes(NaN)) {
+        alert('Complete the survey to find a match')
+        submit.toggleAttribute('data-toggle')
+        return false
+      } else {
+        console.log(scores, friendDiffs)
+        form.reset()
+        for (let range of ranges) {
+          range.selectedIndex = 2
+        }
+        let newFriend = {
+          firstName,
+          photoURL,
+          scores
+        }
+      }
+    }
+    submit.addEventListener('click', evalFriend)
+  </script>
 </body>
 
 </html>
