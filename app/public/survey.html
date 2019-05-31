@@ -99,6 +99,12 @@
       </fieldset>
       <button class="f6 link dim br-pill ph3 pv2 mv4 dib white bg-dark-blue input-reset bw0 pointer w-100">Submit</button>
     </form>
+
+    <div class="card">
+      <div class="card-title"></div>
+      <div class="card-body modal"></div>
+    </div>
+
     <div class="tc">
       <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder" class="blue link">GitHub Repo</a>
     </div>
@@ -117,7 +123,7 @@
 
     const evalFriend = (event) => {
       event.preventDefault()
-      let bigDiff = { difference: 9000 },
+      let bigDiff = { difference: 1000 },
           friendDiffs = [],
           totalDiff = []
       if (submit.getAttribute('data-toggle') === null || submit.getAttribute('data-toggle') === '') {
@@ -125,7 +131,8 @@
       }
       let firstName = document.querySelector('#firstName').value.trim(),
           photoURL = document.querySelector('#photoURL').value.trim(),
-          ranges = document.querySelectorAll('input[type="range"]')
+          ranges = document.querySelectorAll('input[type="range"]'),
+          outputs = document.querySelectorAll('output')
       for (let range of ranges) {
         scores.push(parseInt(range.value))
       }
@@ -134,16 +141,49 @@
         submit.toggleAttribute('data-toggle')
         return false
       } else {
-        console.log(scores, friendDiffs)
+        // console.log(scores, friendDiffs)
         form.reset()
         for (let range of ranges) {
           range.selectedIndex = 2
         }
+        for (let output of outputs) {
+          output.value = 3
+        }
         let newFriend = {
-          firstName,
-          photoURL,
+          name: firstName,
+          photo: photoURL,
           scores
         }
+        fetch('/api/friends', {
+          body: JSON.stringify(newFriend),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
+        })
+          .then(handleErrors)
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            data.pop()
+            for (let friend of data) {
+              sumTotal = 0
+              totalDiff = friend.scores.map((item, index) => {
+                return Math.abs(item - newFriend.scores[index])
+              })
+              for (let totalDiffValue of totalDiff) {
+                sumTotal += totalDiffValue
+              }
+              friend.difference = sumTotal
+              friendDiffs.push(friend)
+            }
+            for (let diff of friendDiffs) {
+              if (diff.difference < bigDiff.difference) bigDiff = diff
+            }
+            let template = `<h1>${bigDiff.name}</h1> <img src="${bigDiff.photo}" alt="Photo of ${bigDiff.name}">`
+            modal.innerHTML = template
+          })
       }
     }
     submit.addEventListener('click', evalFriend)
