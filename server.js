@@ -1,6 +1,3 @@
-// TODO
-// server.js
-
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -18,8 +15,4 @@ app.use(express.static('public'))
 require(path.join(__dirname, './app/routing/htmlRoutes'))(app)
 require(path.join(__dirname, './app/routing/apiRoutes'))(app)
 
-// Start express Server
-app.listen(PORT, error => {
-  if (error) throw error
-  console.log(`Click to open => http://localhost:${PORT}`)
-})
+app.listen(PORT, function() { })

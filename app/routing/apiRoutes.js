@@ -1,5 +1,3 @@
-// apiRoutes.js
-
 const friends = require('../data/friends')
 
 module.exports = (app) => {
