@@ -15,4 +15,8 @@ app.use(express.static('public'))
 require(path.join(__dirname, './app/routing/htmlRoutes'))(app)
 require(path.join(__dirname, './app/routing/apiRoutes'))(app)
 
-app.listen(PORT, function() { })
+// Start express Server
+app.listen(PORT, error => {
+  if (error) throw error
+  console.log(`Click to open => http://localhost:${PORT}`)
+})
