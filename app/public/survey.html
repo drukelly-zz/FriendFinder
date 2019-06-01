@@ -7,6 +7,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>FriendFinder: Survey</title>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+  <style>
+    #matchedFriend {
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 50%;
+    }
+    .overlay.active {
+      background-color: rgba(0, 0, 0, .25);
+      content: "";
+      height: 100vh;
+      left: 0;
+      top: 0;
+      width: 100vw;
+    }
+  </style>
 </head>
 
 <body class="sans-serif">
@@ -97,21 +112,27 @@
           <output id="q10Value" class="pl3">3</output>
         </div>
       </fieldset>
-      <button class="f6 link dim br-pill ph3 pv2 mv4 dib white bg-dark-blue input-reset bw0 pointer w-100">Submit</button>
+      <button class="f6 link dim br-pill ph3 pv2 mv4 dib white bg-dark-blue input-reset bw0 pointer w-100" type="button" data-toggle="modal" data-target="#matchedFriend">Submit</button>
     </form>
 
-    <div class="card">
-      <div class="card-title"></div>
-      <div class="card-body modal"></div>
+    <div id="matchedFriend" class="card modal dn absolute z-5 mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10" role="dialog" aria-hidden="true">
+      <h3 class="tc">
+        It's a match!
+      </h3>
+      <div class="card-body tc"></div>
     </div>
+    <div class="overlay fixed z-1"></div>
 
     <div class="tc">
       <a href="/api/friends" class="blue link">API Friends List</a> | <a href="https://github.com/drukelly/FriendFinder" class="blue link">GitHub Repo</a>
     </div>
   </div>
   <script>
+
     const form = document.querySelector('form')
-    const modal = document.querySelector('.modal')
+    const modal = document.querySelector('#matchedFriend')
+    const modalContent = document.querySelector('.card-body')
+    const overlay = document.querySelector('.overlay')
     const submit = document.querySelector('button')
     let scores = [],
         sumTotal = 0
@@ -141,7 +162,8 @@
         submit.toggleAttribute('data-toggle')
         return false
       } else {
-        // console.log(scores, friendDiffs)
+        modal.classList.remove('dn')
+        overlay.classList.add('active')
         form.reset()
         for (let range of ranges) {
           range.selectedIndex = 2
@@ -181,12 +203,20 @@
             for (let diff of friendDiffs) {
               if (diff.difference < bigDiff.difference) bigDiff = diff
             }
-            let template = `<h1>${bigDiff.name}</h1> <img src="${bigDiff.photo}" alt="Photo of ${bigDiff.name}">`
-            modal.innerHTML = template
+            let template = `
+            <img src="${bigDiff.photo}" alt="Photo of ${bigDiff.name}" class="br-100 h4 w4 dib ba b--black-05 pa2">
+            <h1 class="f3 mb2">${bigDiff.name}</h1>
+            `
+            modalContent.innerHTML = template
           })
       }
     }
     submit.addEventListener('click', evalFriend)
+
+    overlay.addEventListener('click', event => {
+      event.preventDefault();
+      location.reload()
+    })
   </script>
 </body>
 
